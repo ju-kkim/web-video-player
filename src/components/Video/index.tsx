@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useVideo } from 'src/context/video/context';
 import { getPlayTimeRange, getRunningTime } from 'src/utils/rangeUtils';
 import VIDEO from '../../Assets/video/Big_Buck_Bunny.mp4';
+import { TEST_ID } from 'src/constants/testId';
 
 export default function Video() {
   const { VideoRef, setIsPlay, isEnd, setIsEnd, playTime, setPlayTime, setRunningTime } = useVideo();
@@ -25,7 +26,13 @@ export default function Video() {
   }, []);
 
   return (
-    <video ref={VideoRef} height="100%" autoPlay={true} style={{ opacity: isEnd ? '0.5' : '1' }}>
+    <video
+      ref={VideoRef}
+      height="100%"
+      autoPlay={true}
+      style={{ opacity: isEnd ? '0.5' : '1' }}
+      data-testid={TEST_ID.VIDEO}
+    >
       <source src={VIDEO} type="video/mp4" />
     </video>
   );

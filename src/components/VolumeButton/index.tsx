@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { usePlayer } from 'src/context/player/context';
 import { useVideo } from 'src/context/video/context';
 import IconButton from 'src/components/IconButton';
-import VolumeFull from '../../Assets/icon/volumefullOn_solid.svg';
-import VolumeOn from '../../Assets/icon/volumeOn_solid.svg';
-import VolumeOff from '../../Assets/icon/volumeOff_solid.svg';
+import VolumeFull from 'src/Assets/icon/volumefullOn_solid.svg';
+import VolumeOn from 'src/Assets/icon/volumeOn_solid.svg';
+import VolumeOff from 'src/Assets/icon/volumeOff_solid.svg';
 import * as S from './style';
 import { VIDEO_INFO } from 'src/common/Constants';
 import VolumeRange from './VolumeRange';
+import { TEST_ID } from 'src/constants/testId';
 
 export default function VolumeButton() {
   const { VideoRef } = useVideo();
@@ -25,8 +26,8 @@ export default function VolumeButton() {
   }, [isVolumeOff, currentVolume]);
 
   return (
-    <S.VolumeWrap onMouseOver={() => setIsVolumeSetMode(true)}>
-      <IconButton icon={<Icon />} onClick={switchVolumeOff} />
+    <S.VolumeWrap onMouseOver={() => setIsVolumeSetMode(true)} data-testid={TEST_ID.VOLUME_BUTTON}>
+      <IconButton icon={<Icon />} onClick={switchVolumeOff} testid={isVolumeOff ? TEST_ID.MUTE : TEST_ID.NOT_MUTE} />
       <VolumeRange volumeInfo={{ isVolumeOff, currentVolume, setCurrentVolume }} />
     </S.VolumeWrap>
   );
